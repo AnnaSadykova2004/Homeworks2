@@ -1,4 +1,6 @@
-﻿namespace Hospital.UnitTests
+﻿using System.Diagnostics.Metrics;
+
+namespace Hospital.UnitTests
 {
     [TestFixture]
     public class PatientTests
@@ -28,5 +30,17 @@
             Assert.That(patient.GetInfo(), Is.EqualTo(expectedInfo));
         }
 
+        [Test]
+        public void CompareToTest()
+        {
+            var анатолий = new HospitalPatient("Анатолий", "Фролов", 2378752381606532, "неврологического", 107);
+
+            var николай = new HospitalPatient("Николай", "Некрасов", 3478862392607632, "терапевтического", 103);
+
+            var егор = new HospitalPatient("Егор", "Аверин", 4578972353608732, "кардиологического", 115);
+
+            Assert.That(николай.CompareTo(анатолий), Is.LessThan(0));
+            Assert.That(егор.CompareTo(егор), Is.EqualTo(0));
+        }
     }
 }
